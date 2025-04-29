@@ -1,0 +1,688 @@
+#root {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  min-height: 100vh;
+  background-color: var(--background-color);
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --background-color: #f5f6fa;
+  --text-color: #2c3e50;
+  --border-color: #dcdde1;
+  --touch-target-size: 44px;
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0.5rem 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  min-height: 100vh;
+  background-color: var(--background-color);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 12px;
+  position: sticky;
+  top: 0;
+  background: var(--background-color);
+  z-index: 100;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 0;
+}
+
+.header-left h1 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.sailboat-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--secondary-color);
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  margin-right: -0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 24px;
+}
+
+.hamburger-icon span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: transform 0.2s;
+}
+
+.close-menu {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-menu span {
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: transform 0.2s;
+}
+
+.close-menu span:first-child {
+  transform: rotate(45deg);
+}
+
+.close-menu span:last-child {
+  transform: rotate(-45deg);
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menu-content {
+  background-color: white;
+  width: 250px;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.menu-item {
+  background: none;
+  border: none;
+  padding: 0.75rem;
+  text-align: left;
+  font-size: 1rem;
+  color: var(--text-color);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+  background-color: var(--background-color);
+}
+
+.menu-item.active {
+  color: var(--secondary-color);
+  font-weight: 500;
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+  header {
+    padding: 0.5rem;
+  }
+
+  .header-left h1 {
+    font-size: 1.25rem;
+  }
+
+  .sailboat-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .menu-content {
+    width: 100%;
+  }
+}
+
+.checklist-section h2 {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 12px;
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.checklist-section h2:active {
+  background-color: rgba(52, 152, 219, 0.1);
+  border-radius: 4px;
+}
+
+.section-toggle {
+  color: var(--secondary-color);
+  user-select: none;
+  font-size: 1.2rem;
+  opacity: 1;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+label:active {
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+input[type="checkbox"] {
+  margin-right: 0.75rem;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--secondary-color);
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #7f8c8d;
+}
+
+footer {
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0.5rem 0;
+  position: sticky;
+  bottom: 0;
+  background: var(--background-color);
+  z-index: 100;
+}
+
+.reset-button {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+  max-width: 200px;
+  touch-action: manipulation;
+}
+
+.reset-button:active {
+  background-color: #2980b9;
+  transform: scale(0.98);
+}
+
+.header-actions {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 1001;
+}
+
+.edit-mode-button {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-mode-button.active {
+  background-color: #2980b9;
+}
+
+.edit-mode-button:hover {
+  background-color: #2980b9;
+  transform: translateY(-1px);
+}
+
+.token-manage {
+  background: none;
+  border: none;
+  color: var(--secondary-color);
+  font-size: 0.8rem;
+  padding: 0.25rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.token-manage:hover {
+  color: #2980b9;
+}
+
+.token-form {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.token-form h2 {
+  color: var(--primary-color);
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.token-form p {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.token-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.token-form input {
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.token-form button {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+  touch-action: manipulation;
+}
+
+.token-form button:active {
+  background-color: #2980b9;
+  transform: scale(0.98);
+}
+
+.token-help {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.token-help a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.token-help a:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin: 0.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.spinner {
+  position: fixed;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--background-color);
+  border-top: 2px solid var(--secondary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 1000;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 480px) {
+  .app {
+    padding: 0.25rem;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .checklist-section h2 {
+    font-size: 1rem;
+  }
+
+  li {
+    padding: 0.5rem 0;
+  }
+
+  input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+  }
+
+  .reset-button {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+  }
+
+  .header-actions {
+    top: 0.25rem;
+    right: 0.25rem;
+  }
+
+  .edit-mode-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Improve scrolling performance */
+main {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.section-actions,
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  opacity: 1;
+}
+
+.checklist-section:hover .section-actions,
+li:hover .item-actions {
+  opacity: 1;
+}
+
+.edit-button {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-color);
+}
+
+.edit-button:hover {
+  opacity: 1;
+}
+
+.edit-button svg {
+  fill: currentColor;
+}
+
+.edit-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.edit-container input {
+  flex: 1;
+  padding: 0.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.edit-container input:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.remove-button {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #dc2626;
+}
+
+.remove-button:hover {
+  opacity: 1;
+}
+
+.remove-button svg {
+  fill: currentColor;
+}
+
+.add-section,
+.add-item {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.add-section button,
+.add-item button {
+  background: none;
+  border: 1px dashed var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  color: var(--secondary-color);
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.add-section button:hover,
+.add-item button:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+  border-color: var(--secondary-color);
+}
+
+.checklist-section h2 input {
+  width: 100%;
+  padding: 0.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1.1rem;
+  margin-right: 2rem;
+}
+
+.checklist-section li input {
+  padding: 0.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+  .section-actions,
+  .item-actions {
+    gap: 0.25rem;
+  }
+
+  .edit-button,
+  .remove-button {
+    padding: 0.5rem;
+  }
+
+  .add-section,
+  .add-item {
+    flex-direction: column;
+  }
+
+  .add-section button,
+  .add-item button {
+    width: 100%;
+  }
+}
+
+.checklist-section li label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  text-align: left;
+}
+
+.checklist-section li label > span {
+  flex: 1;
+  margin-right: 0.5rem;
+  text-align: left;
+}
+
+.section-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 1;
+}
+
+.move-button {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-color);
+}
+
+.move-button:hover {
+  opacity: 1;
+}
+
+.move-button svg {
+  fill: currentColor;
+}
