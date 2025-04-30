@@ -162,46 +162,53 @@ export default function Weather() {
       </div>
       <h3>Volgende 12 uur</h3>
       <div className="weather-hourly scroll-x">
-        {weather.hourly.time.slice(0, 12).map((time: Date, i: number) => (
-          <div className="weather-hour" key={i}>
-            <div className="weather-hour-time">{time.getHours()}:00</div>
-            <div className="weather-hour-temp">
-              {weather.hourly.temperature[i]?.toFixed(1)}°C
-            </div>
-            <div className="weather-hour-wind">
-              {Math.round(weather.hourly.windSpeed[i] * 10) / 10} kn{" "}
-              {degToCompass(weather.hourly.windDirection[i])}
-              <span
-                className="wind-arrow"
-                style={{
-                  display: "inline-block",
-                  marginLeft: 6,
-                  verticalAlign: "middle",
-                  transform: `rotate(${weather.hourly.windDirection[i]}deg)`,
-                }}
-                title={`Wind direction: ${weather.hourly.windDirection[i]}°`}
-              >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  style={{ display: "inline" }}
-                >
-                  <path
-                    d="M12 2 L12 22 M12 2 L8 8 M12 2 L16 8"
-                    stroke="#3498db"
-                    strokeWidth="2"
-                    fill="none"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </span>
-            </div>
-            <div className="weather-hour-gusts">
-              Gusts: {Math.round(weather.hourly.windGusts[i] * 10) / 10} kn
-            </div>
-          </div>
-        ))}
+        {(() => {
+          const now = new Date();
+          const firstIdx = weather.hourly.time.findIndex((t) => t > now);
+          const startIdx = firstIdx === -1 ? 0 : firstIdx;
+          return weather.hourly.time
+            .slice(startIdx, startIdx + 12)
+            .map((time: Date, i: number) => (
+              <div className="weather-hour" key={i}>
+                <div className="weather-hour-time">{time.getHours()}:00</div>
+                <div className="weather-hour-temp">
+                  {weather.hourly.temperature[i]?.toFixed(1)}°C
+                </div>
+                <div className="weather-hour-wind">
+                  {Math.round(weather.hourly.windSpeed[i] * 10) / 10} kn{" "}
+                  {degToCompass(weather.hourly.windDirection[i])}
+                  <span
+                    className="wind-arrow"
+                    style={{
+                      display: "inline-block",
+                      marginLeft: 6,
+                      verticalAlign: "middle",
+                      transform: `rotate(${weather.hourly.windDirection[i]}deg)`,
+                    }}
+                    title={`Wind direction: ${weather.hourly.windDirection[i]}°`}
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      style={{ display: "inline" }}
+                    >
+                      <path
+                        d="M12 2 L12 22 M12 2 L8 8 M12 2 L16 8"
+                        stroke="#3498db"
+                        strokeWidth="2"
+                        fill="none"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                </div>
+                <div className="weather-hour-gusts">
+                  Gusts: {Math.round(weather.hourly.windGusts[i] * 10) / 10} kn
+                </div>
+              </div>
+            ));
+        })()}
       </div>
     </div>
   );
