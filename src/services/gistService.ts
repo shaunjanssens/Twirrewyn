@@ -1,6 +1,6 @@
 import { ChecklistData } from "../types";
 
-const GIST_ID = "986b738df2b3fdd203fce41f5f70de1d";
+const GIST_ID = "1212e838bdf8f31068432ab2b9c03917";
 const GIST_FILENAME = "twirrewyn-checklist.json";
 const NOTES_FILENAME = "twirrewyn-notes.txt";
 
