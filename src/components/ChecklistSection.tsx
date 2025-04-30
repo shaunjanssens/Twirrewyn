@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ChecklistSection as ChecklistSectionType } from "../types";
 
 interface ChecklistSectionProps {
@@ -18,6 +18,9 @@ interface ChecklistSectionProps {
     itemId: string,
     direction: "up" | "down"
   ) => void;
+  autoEditSection?: boolean;
+  autoEditItemId?: string | null;
+  clearAutoEdit?: () => void;
 }
 
 export function ChecklistSection({
@@ -33,10 +36,40 @@ export function ChecklistSection({
   onRemoveItem,
   onMoveSection,
   onMoveItem,
+  autoEditSection = false,
+  autoEditItemId = null,
+  clearAutoEdit,
 }: ChecklistSectionProps) {
   const [editingSection, setEditingSection] = useState(false);
   const [editingItem, setEditingItem] = useState<string | null>(null);
   const [editText, setEditText] = useState("");
+  const sectionInputRef = useRef<HTMLInputElement | null>(null);
+  const itemInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Auto-edit section when prop is set
+  useEffect(() => {
+    if (autoEditSection) {
+      setEditingSection(true);
+      setEditText(section.title);
+      setTimeout(() => {
+        sectionInputRef.current?.focus();
+        if (clearAutoEdit) clearAutoEdit();
+      }, 0);
+    }
+  }, [autoEditSection, section.title, clearAutoEdit]);
+
+  // Auto-edit item when prop is set
+  useEffect(() => {
+    if (autoEditItemId) {
+      setEditingItem(autoEditItemId);
+      const item = section.items.find((i) => i.id === autoEditItemId);
+      setEditText(item ? item.text : "");
+      setTimeout(() => {
+        itemInputRef.current?.focus();
+        if (clearAutoEdit) clearAutoEdit();
+      }, 0);
+    }
+  }, [autoEditItemId, section.items, clearAutoEdit]);
 
   const handleSectionEdit = () => {
     setEditingSection(true);
@@ -108,6 +141,7 @@ export function ChecklistSection({
               onKeyDown={(e) => e.key === "Enter" && handleSectionSave()}
               onClick={(e) => e.stopPropagation()}
               autoFocus
+              ref={sectionInputRef}
             />
             {isEditMode && (
               <button className="remove-button" onClick={handleRemoveSection}>
@@ -191,6 +225,7 @@ export function ChecklistSection({
                     }
                     onClick={(e) => e.stopPropagation()}
                     autoFocus
+                    ref={itemInputRef}
                   />
                   {isEditMode && (
                     <button

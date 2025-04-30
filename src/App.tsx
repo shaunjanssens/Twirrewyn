@@ -4,6 +4,8 @@ import { saveChecklist, loadChecklist } from "./services/gistService";
 import { Header } from "./components/Header";
 import { ChecklistSection as ChecklistSectionComponent } from "./components/ChecklistSection";
 import { TokenForm } from "./components/TokenForm";
+import Notes from "./components/Notes";
+import Weather from "./components/Weather";
 import "./App.css";
 
 function App() {
@@ -14,6 +16,10 @@ function App() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [showTokenForm, setShowTokenForm] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [newlyAddedSectionId, setNewlyAddedSectionId] = useState<string | null>(
+    null
+  );
+  const [newlyAddedItemId, setNewlyAddedItemId] = useState<string | null>(null);
 
   useEffect(() => {
     const savedToken = localStorage.getItem("github-token");
@@ -145,7 +151,7 @@ function App() {
   const addSection = () => {
     const newSection = {
       id: `section-${Date.now()}`,
-      title: "New Section",
+      title: "",
       items: [],
     };
     const newChecklist = {
@@ -153,13 +159,15 @@ function App() {
       sections: [...checklist.sections, newSection],
     };
     setChecklist(newChecklist);
+    setNewlyAddedSectionId(newSection.id);
+    setNewlyAddedItemId(null);
     saveChecklistToGist(newChecklist);
   };
 
   const addItem = (sectionId: string) => {
     const newItem = {
       id: `item-${Date.now()}`,
-      text: "New Item",
+      text: "",
       completed: false,
     };
     const newChecklist = {
@@ -175,6 +183,8 @@ function App() {
       }),
     };
     setChecklist(newChecklist);
+    setNewlyAddedSectionId(null);
+    setNewlyAddedItemId(newItem.id + "@" + sectionId);
     saveChecklistToGist(newChecklist);
   };
 
@@ -301,6 +311,18 @@ function App() {
             onRemoveItem={removeItem}
             onMoveSection={moveSection}
             onMoveItem={moveItem}
+            autoEditSection={newlyAddedSectionId === section.id}
+            autoEditItemId={
+              newlyAddedItemId &&
+              newlyAddedItemId.startsWith("item-") &&
+              newlyAddedItemId.endsWith("@" + section.id)
+                ? newlyAddedItemId.split("@")[0]
+                : null
+            }
+            clearAutoEdit={() => {
+              setNewlyAddedSectionId(null);
+              setNewlyAddedItemId(null);
+            }}
           />
         ))}
         {isEditMode && (
@@ -309,6 +331,10 @@ function App() {
           </div>
         )}
       </main>
+      <footer>
+        <Notes token={token} />
+        <Weather />
+      </footer>
     </div>
   );
 }
